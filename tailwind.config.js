@@ -7,7 +7,7 @@ module.exports = {
   ],
   theme: {
     screens: {
-      xs: "360px",
+      xs: "260px",
       sm: "480px",
       md: "768px",
       lg: "976px",
@@ -20,7 +20,8 @@ module.exports = {
       colors: {
         GrayishColor: '#343634',
         PinkishColor: '#ff7777',
-        DarkBlueColor: '#1e292b'
+        DarkBlueColor: '#1e292b',
+        GrayColor: "#4f6c6b"
       }
     },
   },

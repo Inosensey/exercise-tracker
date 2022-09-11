@@ -18,7 +18,7 @@ const RegisterPage: NextPage = () => {
       <main>
         <Form>
           <div className="flex flex-col items-center  xs:w-full sm:h-4/5 sm:w-4/5 md:w-3/5 lg:w-1/3">
-            <Header Text="Sign Up to Workoutly" />
+            <Header Text="Register to Workoutly" />
             <form className="flex w-4/5 flex-col gap-4 rounded-xl bg-DarkBlueColor p-6">
               <div className="w-full">
                 <Input type="email" name="email" label="Email" />
