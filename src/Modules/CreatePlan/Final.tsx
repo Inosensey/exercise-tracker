@@ -4,7 +4,7 @@ function Final() {
       <h1 className="font-bold text-black xs:text-sm">
         You are in the last step!
       </h1>
-      <p className="xs:text-xs">
+      <p className="text-DarkBlueColor xs:text-xs">
         Just create the name of your{" "}
         <span className="font-bold text-PinkishColor">plan</span> below and you
         are good to go!

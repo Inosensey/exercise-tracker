@@ -1,6 +1,6 @@
 function PlanTabs(props: { activeTab: string; setActiveTab: any }) {
   return (
-    <div className="flex h-[13%] items-center text-center font-poppins font-bold text-black xs:text-xs">
+    <div className="flex h-[8%] items-center text-center font-poppins font-bold text-black xs:text-xs">
       <p
         onClick={() => props.setActiveTab("Calculate BMI")}
         className={`flex h-full w-1/4 items-center justify-center ${

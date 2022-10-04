@@ -52,7 +52,7 @@ function Exercises() {
       {exerciseCreateType === "Generate" && (
         <AutoGenerate
           status={status}
-          exerciseSchedule={data}
+          exerciseSet={data}
           setExerciseCreateType={setExerciseCreateType}
         />
       )}
