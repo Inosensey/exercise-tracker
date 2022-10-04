@@ -1,10 +1,10 @@
 import React from "react";
 
-type InputType = {
+interface InputType {
   type: string;
   label: string;
   name: string;
-};
+}
 
 function Input(props: InputType) {
   return (

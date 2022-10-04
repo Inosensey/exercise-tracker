@@ -1,6 +1,20 @@
+import Loading from "@/Common/loading";
+import { IExerciseSet } from "Typescript/Interface";
+
 import ExerciseCard from "./ExerciseCard";
 
-function AutoGenerate(props: { setExerciseCreateType: any }) {
+type props = {
+  setExerciseCreateType: React.Dispatch<React.SetStateAction<string>>;
+  exerciseSchedule: IExerciseSet | undefined;
+  status: string;
+};
+
+function AutoGenerate({
+  setExerciseCreateType,
+  exerciseSchedule,
+  status,
+}: props) {
+  if (status === "loading") return <Loading />;
   return (
     <div className="flex flex-col gap-3">
       <ExerciseCard />
@@ -10,7 +24,7 @@ function AutoGenerate(props: { setExerciseCreateType: any }) {
       <ExerciseCard />
       <div className="flex justify-between font-poppins">
         <button
-          onClick={() => props.setExerciseCreateType("")}
+          onClick={() => setExerciseCreateType("")}
           className="w-3/12  cursor-pointer rounded rounded-lg border border-DarkBlueColor p-1 font-bold text-DarkBlueColor xs:text-sm"
         >
           Cancel
