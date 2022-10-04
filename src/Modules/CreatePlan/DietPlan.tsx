@@ -1,9 +1,27 @@
 import React, { useState } from "react";
+import { useQuery } from "react-query";
+import getMealPlan from "Service/Meal/getMealPlan";
+import { IMealPlan } from "Typescript/Interface";
 import AutoGenerate from "./DietPlanCreationType/AutoGenerate";
 import Customize from "./DietPlanCreationType/Customize";
 
-function DietPlan() {
+type props = {
+  bmi: number;
+};
+
+function DietPlan({ bmi }: props) {
   const [dietPlanCreateType, setDietPlanCreateType] = useState<string>("");
+
+  const fetchMealPlan = async () => {
+    const response: IMealPlan | undefined = await getMealPlan(bmi);
+    return response;
+  };
+
+  const { status, data, error, refetch } = useQuery<IMealPlan | undefined>(
+    "MealPlan",
+    fetchMealPlan,
+    { enabled: false }
+  );
   return (
     <div className="h-[100%] overflow-auto font-poppins">
       {dietPlanCreateType === "" && (
@@ -21,7 +39,10 @@ function DietPlan() {
           </p>
           <div className="mt-9 flex flex-col items-center gap-5 xs:text-sm">
             <button
-              onClick={() => setDietPlanCreateType("Generate")}
+              onClick={() => {
+                setDietPlanCreateType("Generate");
+                refetch();
+              }}
               className="w-5/12 cursor-pointer bg-PinkishColor p-1 font-bold text-white"
             >
               Generate

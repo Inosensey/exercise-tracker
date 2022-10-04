@@ -17,7 +17,7 @@ function CreatePlan() {
             <CalculateBMI setBmi={setBmi} bmi={bmi} />
           )}
           {activeTab === "Exercises" && <Exercises />}
-          {activeTab === "Diet plan" && <DietPlan />}
+          {activeTab === "Diet plan" && <DietPlan bmi={bmi} />}
           {activeTab === "Finish" && <Final />}
         </div>
       </div>
