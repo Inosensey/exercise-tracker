@@ -1,19 +1,25 @@
 import React from "react";
+import { MealTypeInfo } from "Typescript/Types";
 
-function Meal() {
+type props = {
+  MealInfo: MealTypeInfo;
+};
+
+function Meal({ MealInfo }: props) {
   return (
     <div className="border border-DarkBlueColor text-black">
       <div className="border-b border-DarkBlueColor p-1">
         <label className="font-bold xs:text-sm">Meal name:</label>
-        <p className="xs:text-sm">name here</p>
+        <p className="xs:text-sm">{MealInfo.title}</p>
       </div>
       <div className="border-b border-DarkBlueColor p-1">
-        <label className="font-bold xs:text-sm">Protein:</label>
-        <p className="xs:text-sm">protein here</p>
+        <label className="font-bold xs:text-sm">Calories:</label>
+        <p className="xs:text-sm">{MealInfo.cal}</p>
       </div>
       <div className="border-b border-DarkBlueColor p-1">
-        <label className="font-bold xs:text-sm">Carbs:</label>
-        <p className="xs:text-sm">carbs here</p>
+        <button className="cursor-pointer bg-PinkishColor p-1 px-1.5 font-poppins text-white xs:text-sm">
+          View ingredients
+        </button>
       </div>
     </div>
   );

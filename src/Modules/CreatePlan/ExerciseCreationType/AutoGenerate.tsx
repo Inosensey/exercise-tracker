@@ -1,4 +1,4 @@
-import Loading from "@/Common/loading";
+import Loading from "@/Common/Other/Loading";
 import { IExerciseSchedule, IExerciseSet } from "Typescript/Interface";
 
 import ExerciseCard from "./ExerciseCard";

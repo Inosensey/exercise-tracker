@@ -1,17 +1,19 @@
+import { MealTypeInfo } from "Typescript/Types";
 import Meal from "./Meal";
 
-function MealCard() {
+type props = {
+  MealType: string;
+  MealInfo: MealTypeInfo;
+};
+
+function MealCard({ MealType, MealInfo }: props) {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="font-bold text-DarkBlueColor underline xs:text-base">
-        Breakfast
+        {MealType}
       </h3>
       <div className="flex flex-col gap-1 font-poppins">
-        <Meal />
-        <Meal />
-        <Meal />
-        <Meal />
-        <Meal />
+        <Meal MealInfo={MealInfo} />
       </div>
     </div>
   );

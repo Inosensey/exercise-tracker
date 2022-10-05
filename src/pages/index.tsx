@@ -33,7 +33,7 @@ const Index: NextPage = () => {
             <div className="mt-3 w-4/5 border border-PinkishColor p-3">
               <p className="text-center font-poppins text-xs text-white">
                 Not a member yet?{" "}
-                <Link href="/Register">
+                <Link href="/register">
                   <span className="cursor-pointer text-PinkishColor underline-offset-1 hover:underline">
                     Create an account
                   </span>

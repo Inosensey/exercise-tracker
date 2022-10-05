@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import getMealPlan from "Service/Meal/getMealPlan";
-import { IMealPlan } from "Typescript/Interface";
+import { IMealType } from "Typescript/Interface";
 import AutoGenerate from "./DietPlanCreationType/AutoGenerate";
 import Customize from "./DietPlanCreationType/Customize";
 
@@ -13,11 +13,11 @@ function DietPlan({ bmi }: props) {
   const [dietPlanCreateType, setDietPlanCreateType] = useState<string>("");
 
   const fetchMealPlan = async () => {
-    const response: IMealPlan | undefined = await getMealPlan(bmi);
+    const response: IMealType[] | undefined = await getMealPlan(bmi);
     return response;
   };
 
-  const { status, data, error, refetch } = useQuery<IMealPlan | undefined>(
+  const { status, data, error, refetch } = useQuery<IMealType[] | undefined>(
     "MealPlan",
     fetchMealPlan,
     { enabled: false }
@@ -57,7 +57,10 @@ function DietPlan({ bmi }: props) {
         </>
       )}
       {dietPlanCreateType === "Generate" && (
-        <AutoGenerate setDietPlanCreateType={setDietPlanCreateType} />
+        <AutoGenerate
+          mealPlan={data}
+          setDietPlanCreateType={setDietPlanCreateType}
+        />
       )}
       {dietPlanCreateType === "Customize" && (
         <Customize setDietPlanCreateType={setDietPlanCreateType} />
