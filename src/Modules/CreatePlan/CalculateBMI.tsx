@@ -1,7 +1,6 @@
-import Input from "@/Common/Input/Input";
-import React, { useState } from "react";
+import { useState } from "react";
 
-import CalCulateBmiLogic from "../../Logic/CalculateBmiLogic";
+import CalCulateBmiLogic from "@/logic/CalculateBmiLogic";
 
 type props = {
   setBmi: React.Dispatch<React.SetStateAction<number>>;

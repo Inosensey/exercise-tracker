@@ -59,6 +59,7 @@ function DietPlan({ bmi }: props) {
       {dietPlanCreateType === "Generate" && (
         <AutoGenerate
           mealPlan={data}
+          status={status}
           setDietPlanCreateType={setDietPlanCreateType}
         />
       )}

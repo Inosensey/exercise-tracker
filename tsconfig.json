@@ -19,6 +19,7 @@
       "@/styles/*":["styles/*"],
       "@/Modules/*":["Modules/*"],
       "@/Common/*":["Common/*"],
+      "@/logic/*":["Logic/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

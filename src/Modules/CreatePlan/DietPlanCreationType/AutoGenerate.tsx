@@ -1,10 +1,11 @@
-import React from "react";
 import { IMealType } from "Typescript/Interface";
 import MealCard from "./MealCard";
+import Loading from "@/Common/Other/Loading";
 
 type props = {
   setDietPlanCreateType: React.Dispatch<React.SetStateAction<string>>;
   mealPlan: IMealType[] | undefined;
+  status: string;
 };
 
 const Days: Array<string> = [
@@ -17,7 +18,8 @@ const Days: Array<string> = [
   "Sunday",
 ];
 
-function AutoGenerate({ setDietPlanCreateType, mealPlan }: props) {
+function AutoGenerate({ setDietPlanCreateType, mealPlan, status }: props) {
+  if (status === "loading") return <Loading />;
   return (
     <div className="flex flex-col gap-3">
       {mealPlan?.map((meal: IMealType, index: number) => (
