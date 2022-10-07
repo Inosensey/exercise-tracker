@@ -1,4 +1,3 @@
-
 export type MealTypeInfo = {
   id: number;
   title: string;

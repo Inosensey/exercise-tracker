@@ -1,6 +1,7 @@
 import { IMealType } from "Typescript/Interface";
 import MealCard from "./MealCard";
 import Loading from "@/Common/Other/Loading";
+import Ingredients from "./Ingredients";
 
 type props = {
   setDietPlanCreateType: React.Dispatch<React.SetStateAction<string>>;

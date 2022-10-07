@@ -1,23 +1,23 @@
 import { ExerciseType } from "./Types";
 
+export interface IIngredientsInfo {
+  image: string;
+  name: string;
+  amount: {
+    metric: {
+      value: number;
+      unit: string;
+    };
+    us: {
+      value: number;
+      unit: string;
+    };
+  };
+}
+
 export interface IIngredients {
   id: number;
-  ingredients: [
-    {
-      image: string;
-      name: string;
-      amount: {
-        metric: {
-          value: number;
-          unit: string;
-        };
-        us: {
-          value: number;
-          unit: string;
-        };
-      };
-    }
-  ];
+  ingredients: [IIngredientsInfo];
 }
 
 export interface IMealType {
