@@ -5,6 +5,7 @@ import { IIngredients, IIngredientsInfo } from "Typescript/Interface";
 type props = {
   setShowPopUpIngredients: React.Dispatch<React.SetStateAction<boolean>>;
   ingredients: IIngredients[] | undefined;
+  recipeName: string;
 };
 
 // Framer Motion Variants
@@ -29,7 +30,11 @@ const DropIn = {
   },
 };
 
-function Ingredients({ setShowPopUpIngredients, ingredients }: props) {
+function Ingredients({
+  setShowPopUpIngredients,
+  ingredients,
+  recipeName,
+}: props) {
   console.log(ingredients);
   return (
     <div className="absolute top-0 left-0 z-10 flex h-screen w-full items-center justify-center bg-black bg-opacity-75 text-white">
@@ -45,6 +50,9 @@ function Ingredients({ setShowPopUpIngredients, ingredients }: props) {
         exit="exit"
       >
         <div className="flex flex-col gap-1 p-1">
+          <h3 className="text-center font-bold text-DarkBlueColor xs:text-base">
+            {recipeName} ingredients
+          </h3>
           {ingredients?.map((data: IIngredients) =>
             data.ingredients.map((ingredientsInfo: IIngredientsInfo) => (
               <div

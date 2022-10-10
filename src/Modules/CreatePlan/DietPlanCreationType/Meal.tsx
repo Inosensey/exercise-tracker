@@ -61,15 +61,12 @@ function Meal({ MealInfo }: props) {
           </button>
         </div>
       </div>
-      <AnimatePresence
-        initial={false}
-        exitBeforeEnter={true}
-        onExitComplete={() => null}
-      >
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {showPopUpIngredients && (
           <Ingredients
             setShowPopUpIngredients={setShowPopUpIngredients}
             ingredients={data}
+            recipeName={MealInfo.title}
           />
         )}
       </AnimatePresence>

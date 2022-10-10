@@ -2,6 +2,9 @@ import { IMealType } from "Typescript/Interface";
 import MealCard from "./MealCard";
 import Loading from "@/Common/Other/Loading";
 import Ingredients from "./Ingredients";
+import { useRef, useState } from "react";
+import Pagination from "../Pagination";
+import MealPlan from "./MealPlan";
 
 type props = {
   setDietPlanCreateType: React.Dispatch<React.SetStateAction<string>>;
@@ -20,20 +23,27 @@ const Days: Array<string> = [
 ];
 
 function AutoGenerate({ setDietPlanCreateType, mealPlan, status }: props) {
+  const [pagination, setPagination] = useState<number>(0);
+  const mealRef = useRef<HTMLDivElement>(null);
   if (status === "loading") return <Loading />;
   return (
-    <div className="flex flex-col gap-3">
-      {mealPlan?.map((meal: IMealType, index: number) => (
-        <div key={Math.random() * 1000}>
-          <h3 className="text-center font-bold text-GrayishColor underline xs:text-lg">
-            {Days[index]}
-          </h3>
-          <MealCard MealType="Breakfast" MealInfo={meal.Breakfast} />
-          <MealCard MealType="Lunch" MealInfo={meal.Lunch} />
-          <MealCard MealType="Dinner" MealInfo={meal.Dinner} />
-        </div>
-      ))}
-
+    <div className="flex h-[100%] flex-col justify-between ">
+      <div className="h-[80%]">
+        <MealPlan
+          Breakfast={mealPlan![pagination].Breakfast}
+          Lunch={mealPlan![pagination].Lunch}
+          Dinner={mealPlan![pagination].Dinner}
+          Day={Days[pagination]}
+          refProp={mealRef}
+        />
+      </div>
+      <Pagination
+        currentPage={pagination}
+        maxPage={mealPlan?.length}
+        pageTitle={Days[pagination]}
+        setPage={setPagination}
+        refProp={mealRef.current!}
+      />
       <div className="flex justify-between font-poppins">
         <button
           onClick={() => setDietPlanCreateType("")}

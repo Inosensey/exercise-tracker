@@ -6,14 +6,18 @@ import Exercise from "./Exercise";
 type props = {
   ExerciseSchedule: IExercisePerDay[] | undefined;
   Week: number;
+  refProp: React.Ref<HTMLDivElement>;
 };
 
-function ExerciseCard({ ExerciseSchedule, Week }: props) {
+function ExerciseCard({ ExerciseSchedule, Week, refProp }: props) {
   return (
-    <div className="flex flex-col gap-2">
-      <h3 className="text-center font-bold text-GrayishColor underline xs:text-lg">
-        Week {Week}
-      </h3>
+    <div className="flex h-[100%] flex-col gap-2 overflow-auto border">
+      <div ref={refProp}>
+        <h3 className="text-center font-bold text-GrayishColor underline xs:text-lg">
+          Week {Week}
+        </h3>
+      </div>
+
       {ExerciseSchedule?.map((schedule: IExercisePerDay) => (
         <div key={schedule.Day}>
           <h3 className="font-bold text-DarkBlueColor underline xs:text-base">

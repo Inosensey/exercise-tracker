@@ -1,5 +1,7 @@
 import Loading from "@/Common/Other/Loading";
+import { useRef, useState } from "react";
 import { IExerciseSchedule, IExerciseSet } from "Typescript/Interface";
+import Pagination from "../Pagination";
 
 import ExerciseCard from "./ExerciseCard";
 
@@ -10,17 +12,26 @@ type props = {
 };
 
 function AutoGenerate({ setExerciseCreateType, exerciseSet, status }: props) {
+  const [pagination, setPagination] = useState<number>(0);
+  const exerciseRef = useRef<HTMLDivElement>(null);
   if (status === "loading") return <Loading />;
   return (
-    <div className="flex flex-col gap-3">
-      {exerciseSet?.Schedules.map((data: IExerciseSchedule) => (
+    <div className="flex h-[100%] flex-col justify-between">
+      <div className="flex h-[80%] flex-col gap-3">
         <ExerciseCard
-          key={data.Week}
-          ExerciseSchedule={data.ExerciseSchedule}
-          Week={data.Week}
+          key={exerciseSet!.Schedules[pagination].Week}
+          ExerciseSchedule={exerciseSet!.Schedules[pagination].ExerciseSchedule}
+          Week={exerciseSet!.Schedules[pagination].Week}
+          refProp={exerciseRef}
         />
-      ))}
-
+      </div>
+      <Pagination
+        setPage={setPagination}
+        maxPage={exerciseSet?.Schedules.length}
+        currentPage={pagination}
+        pageTitle={`Week ${pagination + 1}`}
+        refProp={exerciseRef.current}
+      />
       <div className="flex justify-between font-poppins">
         <button
           onClick={() => setExerciseCreateType("")}
