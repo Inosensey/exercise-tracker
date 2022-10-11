@@ -7,7 +7,10 @@ import PlanTabs from "./PlanTabs";
 
 function CreatePlan() {
   const [activeTab, setActiveTab] = useState<string>("Calculate BMI");
+  const [exerciseCreateType, setExerciseCreateType] = useState<string>("");
+  const [dietPlanCreateType, setDietPlanCreateType] = useState<string>("");
   const [bmi, setBmi] = useState<number>(0);
+  
   return (
     <div className="mt-2 w-full items-center justify-center xs:h-[85%]">
       <div className="bg-white xs:h-full xs:w-full">
@@ -16,8 +19,19 @@ function CreatePlan() {
           {activeTab === "Calculate BMI" && (
             <CalculateBMI setBmi={setBmi} bmi={bmi} />
           )}
-          {activeTab === "Exercises" && <Exercises />}
-          {activeTab === "Diet plan" && <DietPlan bmi={bmi} />}
+          {activeTab === "Exercises" && (
+            <Exercises
+              exerciseCreateType={exerciseCreateType}
+              setExerciseCreateType={setExerciseCreateType}
+            />
+          )}
+          {activeTab === "Diet plan" && (
+            <DietPlan
+              bmi={bmi}
+              dietPlanCreateType={dietPlanCreateType}
+              setDietPlanCreateType={setDietPlanCreateType}
+            />
+          )}
           {activeTab === "Finish" && <Final />}
         </div>
       </div>

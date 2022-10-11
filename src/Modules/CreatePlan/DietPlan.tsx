@@ -7,12 +7,13 @@ import Customize from "./DietPlanCreationType/Customize";
 
 type props = {
   bmi: number;
+  dietPlanCreateType: string;
+  setDietPlanCreateType: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function DietPlan({ bmi }: props) {
-  const [dietPlanCreateType, setDietPlanCreateType] = useState<string>("");
-
+function DietPlan({ bmi, dietPlanCreateType, setDietPlanCreateType }: props) {
   const fetchMealPlan = async () => {
+    console.log(bmi);
     const response: IMealType[] | undefined = await getMealPlan(bmi);
     return response;
   };

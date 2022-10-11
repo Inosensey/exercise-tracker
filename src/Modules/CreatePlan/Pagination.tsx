@@ -17,7 +17,6 @@ function Pagination({
     if (currentPage === maxPage! - 1) return;
     setPage((prev) => prev + 1);
     if (refProp !== null) {
-      console.log(refProp);
       refProp!.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -25,7 +24,6 @@ function Pagination({
     if (currentPage === 0) return;
     setPage((prev) => prev - 1);
     if (refProp !== null) {
-      console.log(refProp);
       refProp!.scrollIntoView({ behavior: "smooth" });
     }
   };
