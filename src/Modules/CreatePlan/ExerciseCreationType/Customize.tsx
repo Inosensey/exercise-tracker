@@ -132,14 +132,16 @@ function Customize({ setExerciseCreateType }: props) {
               />
             </div>
           )}
-          {/* <div className="h-[65%] overflow-auto border"></div> */}
-          {/* this is going to be a pop up */}
         </div>
       </div>
-
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {showPopUpAddExercise && (
-          <AddExercise setShowPopUpAddExercise={setShowPopUpAddExercise} />
+          <AddExercise
+            setShowPopUpAddExercise={setShowPopUpAddExercise}
+            ExerciseSchedules={exerciseSet.Schedules}
+            setExerciseSet={setExerciseSet}
+            exerciseSet={exerciseSet}
+          />
         )}
       </AnimatePresence>
     </>

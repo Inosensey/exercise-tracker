@@ -14,6 +14,6 @@ export type ExerciseType = {
   gifUrl?: string;
   name: string;
   target: string;
-  difficulty: string;
-  exerciseSet: string;
+  difficulty?: string;
+  exerciseSet?: string;
 };
