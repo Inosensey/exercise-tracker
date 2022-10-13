@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { IExerciseSet } from "Typescript/Interface";
-import Pagination from "../Pagination";
+import Pagination from "../../Pagination";
 import CustomizeExerciseCard from "./CustomizeExerciseCard";
 
 type props = {

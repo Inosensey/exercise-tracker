@@ -1,7 +1,7 @@
 import React from "react";
 import { IExercisePerDay, IExerciseSchedule } from "Typescript/Interface";
 import { ExerciseType } from "Typescript/Types";
-import Exercise from "./Exercise";
+import Exercise from "../Exercise";
 
 type props = {
   ExerciseSchedule: IExercisePerDay[] | undefined;

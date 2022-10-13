@@ -1,8 +1,7 @@
 import Loading from "@/Common/Other/Loading";
 import { useRef, useState } from "react";
-import { IExerciseSchedule, IExerciseSet } from "Typescript/Interface";
-import Pagination from "../Pagination";
-
+import { IExerciseSet } from "Typescript/Interface";
+import Pagination from "../../Pagination";
 import ExerciseCard from "./ExerciseCard";
 
 type props = {

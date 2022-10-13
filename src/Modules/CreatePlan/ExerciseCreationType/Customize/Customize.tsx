@@ -1,13 +1,10 @@
 import CustomizeExerciseLogic from "@/logic/CustomizeExerciseLogic";
 import { AnimatePresence } from "framer-motion";
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import { IExerciseSchedule, IExerciseSet } from "Typescript/Interface";
-import Pagination from "../Pagination";
 import AddExercise from "./AddExercise";
 import AddExercisePlan from "./AddExercisePlan";
-import CustomizeExerciseCard from "./CustomizeExerciseCard";
 import CustomizeExercises from "./CustomizeExercises";
-import ExerciseCard from "./ExerciseCard";
 
 type props = {
   setExerciseCreateType: React.Dispatch<React.SetStateAction<string>>;

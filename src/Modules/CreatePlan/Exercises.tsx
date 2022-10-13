@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { IExerciseSet } from "Typescript/Interface";
 import getExercisePlan from "../../Service/Exercise/getExercisePlan";
-import AutoGenerate from "./ExerciseCreationType/AutoGenerate";
-import Customize from "./ExerciseCreationType/Customize";
+import AutoGenerate from "./ExerciseCreationType/AutoGenerate/AutoGenerate";
+import Customize from "./ExerciseCreationType/Customize/Customize";
 
 type props = {
-  exerciseCreateType: string,
-  setExerciseCreateType: React.Dispatch<React.SetStateAction<string>>
-}
+  exerciseCreateType: string;
+  setExerciseCreateType: React.Dispatch<React.SetStateAction<string>>;
+};
 
-function Exercises({exerciseCreateType, setExerciseCreateType}:props) {
-
+function Exercises({ exerciseCreateType, setExerciseCreateType }: props) {
   const fetchExerciseSet = async () => {
     const response: IExerciseSet | undefined = await getExercisePlan();
     return response;
