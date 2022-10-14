@@ -84,7 +84,7 @@ export const SecondaryInput = ({
         }}
       />
       {validation.message !== "" && !validation.valid && (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 font-normal">
           <i className="fa-solid fa-circle-exclamation text-InvalidColor xs:text-xs"></i>
           <p className="text-InvalidColor xs:text-xs">{validation.message}</p>
         </div>

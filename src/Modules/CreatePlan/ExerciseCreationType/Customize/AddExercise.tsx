@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IExerciseSchedule, IExerciseSet } from "Typescript/Interface";
 import { ExerciseType } from "Typescript/Types";
 import { SecondaryInput } from "@/Common/Input/Input";
@@ -44,7 +44,7 @@ const DefaultValidDetails = {
     valid: false,
     message: "",
   },
-  name: {
+  exerciseName: {
     valid: false,
     message: "",
   },
@@ -77,6 +77,7 @@ function AddExercise({
   const [exerciseInput, setExerciseInput] =
     useState<ExerciseType>(ExerciseInfo);
   const [validation, setValidation] = useState(DefaultValidDetails);
+  const [validToSubmit, setValidToSubmit] = useState<boolean>(false);
 
   const addExerciseHandler = () => {
     const result: IExerciseSet = addExercises(
@@ -91,6 +92,22 @@ function AddExercise({
     setExerciseSet(result);
     setShowPopUpAddExercise(false);
   };
+  const checkIfInfoIsValidToSubmit = () => {
+    if (
+      validation.week.valid &&
+      validation.day.valid &&
+      validation.exerciseName.valid &&
+      validation.bodyPart.valid &&
+      validation.target.valid &&
+      validation.equipment.valid
+    )
+      return setValidToSubmit(true);
+    return setValidToSubmit(false);
+  };
+
+  useEffect(() => {
+    checkIfInfoIsValidToSubmit();
+  }, [validation]);
 
   return (
     <div className="absolute top-0 left-0 z-20 flex h-screen w-full items-center justify-center bg-black bg-opacity-75 font-poppins font-bold text-black xs:text-sm">
@@ -130,7 +147,7 @@ function AddExercise({
             setExerciseInput({ ...exerciseInput, name: value })
           }
           enableValidation={true}
-          validation={validation.name}
+          validation={validation.exerciseName}
           setValidation={setValidation}
         />
         <SecondaryInput
@@ -178,7 +195,10 @@ function AddExercise({
             Cancel
           </button>
           <button
-            className="w-3/12 cursor-pointer bg-PinkishColor p-1 font-bold text-white xs:text-sm"
+            className={`w-3/12 cursor-pointer p-1 font-bold text-white xs:text-sm ${
+              validToSubmit ? `bg-PinkishColor` : `bg-FadedPinkishColor`
+            }`}
+            disabled={validToSubmit ? false : true}
             onClick={() => {
               addExerciseHandler();
             }}

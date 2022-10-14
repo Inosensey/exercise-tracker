@@ -39,6 +39,96 @@ const useInputValidation = (
       };
     }
   }
+  if (inputName === "week") {
+    if (inputValue === "") {
+      result = {
+        inputName: inputName,
+        valid: false,
+        message: "This is a required field",
+      };
+    } else {
+      result = {
+        inputName: inputName,
+        valid: true,
+        message: "",
+      };
+    }
+  }
+  if (inputName === "day") {
+    if (inputValue === "") {
+      result = {
+        inputName: inputName,
+        valid: false,
+        message: "This is a required field",
+      };
+    } else {
+      result = {
+        inputName: inputName,
+        valid: true,
+        message: "",
+      };
+    }
+  }
+  if (inputName === "exerciseName") {
+    if (inputValue === "") {
+      result = {
+        inputName: inputName,
+        valid: false,
+        message: "This is a required field",
+      };
+    } else {
+      result = {
+        inputName: inputName,
+        valid: true,
+        message: "",
+      };
+    }
+  }
+  if (inputName === "bodyPart") {
+    if (inputValue === "") {
+      result = {
+        inputName: inputName,
+        valid: false,
+        message: "This is a required field",
+      };
+    } else {
+      result = {
+        inputName: inputName,
+        valid: true,
+        message: "",
+      };
+    }
+  }
+  if (inputName === "target") {
+    if (inputValue === "") {
+      result = {
+        inputName: inputName,
+        valid: false,
+        message: "This is a required field",
+      };
+    } else {
+      result = {
+        inputName: inputName,
+        valid: true,
+        message: "",
+      };
+    }
+  }
+  if (inputName === "equipment") {
+    if (inputValue === "") {
+      result = {
+        inputName: inputName,
+        valid: false,
+        message: "This is a required field",
+      };
+    } else {
+      result = {
+        inputName: inputName,
+        valid: true,
+        message: "",
+      };
+    }
+  }
   return result;
 };
 
