@@ -1,12 +1,9 @@
-import CustomizeExerciseLogic from "@/logic/CustomizeExerciseLogic";
 import { motion } from "framer-motion";
-import React, { ChangeEvent, useState } from "react";
-import {
-  IExercisePerDay,
-  IExerciseSchedule,
-  IExerciseSet,
-} from "Typescript/Interface";
+import { useState } from "react";
+import { IExerciseSchedule, IExerciseSet } from "Typescript/Interface";
 import { ExerciseType } from "Typescript/Types";
+import { SecondaryInput } from "@/Common/Input/Input";
+import CustomizeExerciseLogic from "@/logic/CustomizeExerciseLogic";
 
 type props = {
   setShowPopUpAddExercise: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,9 +35,31 @@ const ExerciseInfo: ExerciseType = {
   name: "",
   target: "",
 };
-const DefaultExerciseDayInfo: IExercisePerDay = {
-  Day: "",
-  Exercise: [ExerciseInfo],
+const DefaultValidDetails = {
+  week: {
+    valid: false,
+    message: "",
+  },
+  day: {
+    valid: false,
+    message: "",
+  },
+  name: {
+    valid: false,
+    message: "",
+  },
+  bodyPart: {
+    valid: false,
+    message: "",
+  },
+  target: {
+    valid: false,
+    message: "",
+  },
+  equipment: {
+    valid: false,
+    message: "",
+  },
 };
 function AddExercise({
   setShowPopUpAddExercise,
@@ -57,6 +76,7 @@ function AddExercise({
   const [day, setDay] = useState<string>("");
   const [exerciseInput, setExerciseInput] =
     useState<ExerciseType>(ExerciseInfo);
+  const [validation, setValidation] = useState(DefaultValidDetails);
 
   const addExerciseHandler = () => {
     const result: IExerciseSet = addExercises(
@@ -73,7 +93,7 @@ function AddExercise({
   };
 
   return (
-    <div className="absolute top-0 left-0 z-20 flex h-screen w-full items-center justify-center bg-black bg-opacity-75 text-white">
+    <div className="absolute top-0 left-0 z-20 flex h-screen w-full items-center justify-center bg-black bg-opacity-75 font-poppins font-bold text-black xs:text-sm">
       <motion.div
         variants={ShowIn}
         initial="initial"
@@ -81,119 +101,75 @@ function AddExercise({
         exit="exit"
         className="flex w-[95%] flex-col gap-2 border bg-white p-1"
       >
-        <div className="flex flex-col">
-          <label className="font-poppins font-bold text-black xs:text-sm">
-            Week
-          </label>
-          <input
-            className="w-full bg-DarkBlueColor p-1 font-poppins text-white xs:text-xs"
-            type="text"
-            name="week"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setWeek(e.target.value)
-            }
-            value={week}
-            placeholder="Week"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-poppins font-bold text-black xs:text-sm">
-            Day
-          </label>
-          <input
-            className="w-full bg-DarkBlueColor p-1 font-poppins text-white xs:text-xs"
-            type="text"
-            name="day"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setDay(e.target.value)
-            }
-            value={day}
-            placeholder="Day"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-poppins font-bold text-black xs:text-sm">
-            Exercise name
-          </label>
-          <input
-            className="w-full bg-DarkBlueColor p-1 font-poppins text-white xs:text-xs"
-            type="text"
-            name="exerciseName"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setExerciseInput({ ...exerciseInput, name: e.target.value })
-            }
-            value={exerciseInput.name}
-            placeholder="Exercise name"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-poppins font-bold text-black xs:text-sm">
-            Body part
-          </label>
-          <input
-            className="w-full bg-DarkBlueColor p-1 font-poppins text-white xs:text-xs"
-            type="text"
-            name="bodyPart"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setExerciseInput({ ...exerciseInput, bodyPart: e.target.value })
-            }
-            value={exerciseInput.bodyPart}
-            placeholder="Body part"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-poppins font-bold text-black xs:text-sm">
-            Target
-          </label>
-          <input
-            className="w-full bg-DarkBlueColor p-1 font-poppins text-white xs:text-xs"
-            type="text"
-            name="target"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setExerciseInput({ ...exerciseInput, target: e.target.value })
-            }
-            placeholder="Target"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-poppins font-bold text-black xs:text-sm">
-            Equipment
-          </label>
-          <input
-            className="w-full bg-DarkBlueColor p-1 font-poppins text-white xs:text-xs"
-            type="text"
-            name="equipment"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setExerciseInput({ ...exerciseInput, equipment: e.target.value })
-            }
-            value={exerciseInput.equipment}
-            placeholder="Equipment"
-          />
-        </div>
-        <div className="flex">
-          <div className="flex w-2/6 gap-2 border">
-            <label className="font-poppins font-bold text-black xs:text-sm">
-              Sets:
-            </label>
-            <input
-              className="w-8/12 bg-DarkBlueColor p-1 font-poppins text-white xs:text-xs"
-              type="number"
-              name="sets"
-              placeholder="Sets"
-            />
-          </div>
-          <div className="flex w-2/6 gap-2 border">
-            <label className="font-poppins font-bold text-black xs:text-sm">
-              Reps:
-            </label>
-            <input
-              className="w-8/12 bg-DarkBlueColor p-1 font-poppins text-white xs:text-xs"
-              type="number"
-              name="reps"
-              placeholder="Reps"
-            />
-          </div>
-        </div>
+        <SecondaryInput
+          label="Week"
+          name="week"
+          type="text"
+          value={week}
+          setValue={setWeek}
+          enableValidation={true}
+          validation={validation.week}
+          setValidation={setValidation}
+        />
+        <SecondaryInput
+          label="Day"
+          name="day"
+          type="text"
+          value={day}
+          setValue={setDay}
+          enableValidation={true}
+          validation={validation.day}
+          setValidation={setValidation}
+        />
+        <SecondaryInput
+          label="Exercise name"
+          name="exerciseName"
+          type="text"
+          value={exerciseInput.name}
+          setValue={(value) =>
+            setExerciseInput({ ...exerciseInput, name: value })
+          }
+          enableValidation={true}
+          validation={validation.name}
+          setValidation={setValidation}
+        />
+        <SecondaryInput
+          label="Body part"
+          name="bodyPart"
+          type="text"
+          value={exerciseInput.bodyPart}
+          setValue={(value) =>
+            setExerciseInput({ ...exerciseInput, bodyPart: value })
+          }
+          enableValidation={true}
+          validation={validation.bodyPart}
+          setValidation={setValidation}
+        />
+        <SecondaryInput
+          label="Target"
+          name="target"
+          type="text"
+          value={exerciseInput.target}
+          setValue={(value) =>
+            setExerciseInput({ ...exerciseInput, target: value })
+          }
+          enableValidation={true}
+          validation={validation.target}
+          setValidation={setValidation}
+        />
+        <SecondaryInput
+          label="Equipment"
+          name="equipment"
+          type="text"
+          value={exerciseInput.equipment}
+          setValue={(value) =>
+            setExerciseInput({ ...exerciseInput, equipment: value })
+          }
+          enableValidation={true}
+          validation={validation.equipment}
+          setValidation={setValidation}
+        />
+
         <div className="flex justify-between font-poppins">
           <button
             onClick={() => setShowPopUpAddExercise(false)}

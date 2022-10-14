@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 import PrimaryButton from "@/Common/Button/PrimaryButton";
-import Input from "@/Common/Input/Input";
+import { PrimaryInput } from "@/Common/Input/Input";
 import Form from "@/Common/LoginRegister/Form";
 import Header from "@/Common/LoginRegister/Header";
 
@@ -21,10 +21,14 @@ const RegisterPage: NextPage = () => {
             <Header Text="Register to Workoutly" />
             <form className="flex w-4/5 flex-col gap-4 rounded-xl bg-DarkBlueColor p-6">
               <div className="w-full">
-                <Input type="email" name="email" label="Email" />
+                <PrimaryInput type="email" name="email" label="Email" />
               </div>
               <div className="w-full">
-                <Input type="password" name="password" label="Password" />
+                <PrimaryInput
+                  type="password"
+                  name="password"
+                  label="Password"
+                />
               </div>
               <div>
                 <PrimaryButton BtnName="Sign Up" />

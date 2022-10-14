@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Form from "@/Common/LoginRegister/Form";
 import Header from "@/Common/LoginRegister/Header";
-import Input from "@/Common/Input/Input";
+import { PrimaryInput } from "@/Common/Input/Input";
 import PrimaryButton from "@/Common/Button/PrimaryButton";
 
 const Index: NextPage = () => {
@@ -21,10 +21,14 @@ const Index: NextPage = () => {
             <Header Text="Sign in to Workoutly" />
             <form className="flex w-4/5 flex-col gap-4 rounded-xl bg-DarkBlueColor p-6">
               <div className="w-full">
-                <Input type="email" name="email" label="Email" />
+                <PrimaryInput type="email" name="email" label="Email" />
               </div>
               <div className="w-full">
-                <Input type="password" name="password" label="Password" />
+                <PrimaryInput
+                  type="password"
+                  name="password"
+                  label="Password"
+                />
               </div>
               <div>
                 <PrimaryButton BtnName="Sign In" />

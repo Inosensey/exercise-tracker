@@ -20,9 +20,12 @@ module.exports = {
       colors: {
         GrayishColor: '#343634',
         PinkishColor: '#ff7777',
+        FadedPinkishColor: "#f7abab",
         DarkBlueColor: '#1e292b',
         GrayColor: "#4f6c6b",
-        Overlay: "rgba(0, 0, 0, 0.7)"
+        Overlay: "rgba(0, 0, 0, 0.7)",
+        InvalidColor: "#ff8080",
+        ValidColor: "#80ff80"
       }
     },
   },

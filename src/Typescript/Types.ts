@@ -1,3 +1,9 @@
+export type ValidationType = {
+  inputName: string;
+  valid: boolean;
+  message: string;
+};
+
 export type MealTypeInfo = {
   id: number;
   title: string;
