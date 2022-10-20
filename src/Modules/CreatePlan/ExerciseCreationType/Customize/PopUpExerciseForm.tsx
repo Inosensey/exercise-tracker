@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { IExerciseSchedule, IExerciseSet } from "Typescript/Interface";
+import {
+  IExercisePerDay,
+  IExerciseSchedule,
+  IExerciseSet,
+} from "Typescript/Interface";
 import { ExerciseType } from "Typescript/Types";
 import { SecondaryInput } from "@/Common/Input/Input";
 import CustomizeExerciseLogic from "@/logic/CustomizeExerciseLogic";
@@ -10,6 +14,9 @@ type props = {
   ExerciseSchedules: IExerciseSchedule[];
   setExerciseSet: React.Dispatch<React.SetStateAction<IExerciseSet>>;
   exerciseSet: IExerciseSet;
+  curWeek: string;
+  action: string;
+  selectedExercise: IExercisePerDay;
 };
 
 // Framer Motion Variants
@@ -36,10 +43,6 @@ const ExerciseInfo: ExerciseType = {
   target: "",
 };
 const DefaultValidDetails = {
-  week: {
-    valid: false,
-    message: "",
-  },
   day: {
     valid: false,
     message: "",
@@ -57,34 +60,55 @@ const DefaultValidDetails = {
     message: "",
   },
   equipment: {
-    valid: false,
+    valid: true,
     message: "",
   },
 };
-function AddExercise({
+function PopUpExerciseForm({
   setShowPopUpAddExercise,
   ExerciseSchedules,
   setExerciseSet,
   exerciseSet,
+  curWeek,
+  action,
+  selectedExercise,
 }: props) {
   // Deconstruct logic
-  const { addExercises } = CustomizeExerciseLogic();
+  const { addExercises, updateExercise } = CustomizeExerciseLogic();
 
   const [exerciseSchedule, setExerciseSchedule] =
     useState<IExerciseSchedule[]>(ExerciseSchedules);
-  const [week, setWeek] = useState<string>("");
+  const [week, setWeek] = useState<string>(curWeek);
   const [day, setDay] = useState<string>("");
   const [exerciseInput, setExerciseInput] =
     useState<ExerciseType>(ExerciseInfo);
   const [validation, setValidation] = useState(DefaultValidDetails);
   const [validToSubmit, setValidToSubmit] = useState<boolean>(false);
 
+  const checkFormAction = () => {
+    if (action === "Edit") {
+      setValidToSubmit(true);
+      setDay(selectedExercise.Day);
+      setExerciseInput({
+        ...exerciseInput,
+        name: selectedExercise.Exercise[0].name,
+        bodyPart: selectedExercise.Exercise[0].bodyPart,
+        equipment: selectedExercise.Exercise[0].equipment,
+        target: selectedExercise.Exercise[0].target,
+      });
+      setValidation((prev) => ({
+        ...validation,
+        day: { ...prev.day, valid: true },
+        exerciseName: { ...prev.exerciseName, valid: true },
+        bodyPart: { ...prev.bodyPart, valid: true },
+        target: { ...prev.target, valid: true },
+        equipment: { ...prev.equipment, valid: true },
+      }));
+    }
+  };
   const addExerciseHandler = () => {
     const result: IExerciseSet = addExercises(
-      exerciseSchedule,
-      setExerciseSchedule,
       exerciseSet,
-      setExerciseSet,
       exerciseInput,
       week,
       day
@@ -92,22 +116,37 @@ function AddExercise({
     setExerciseSet(result);
     setShowPopUpAddExercise(false);
   };
+  const updateExerciseHandler = () => {
+    const result = updateExercise(
+      exerciseSet,
+      exerciseInput,
+      week,
+      day,
+      selectedExercise.Exercise[0].name
+    );
+    setExerciseSet(result);
+    setShowPopUpAddExercise(false);
+  };
   const checkIfInfoIsValidToSubmit = () => {
     if (
-      validation.week.valid &&
       validation.day.valid &&
       validation.exerciseName.valid &&
       validation.bodyPart.valid &&
       validation.target.valid &&
       validation.equipment.valid
-    )
-      return setValidToSubmit(true);
-    return setValidToSubmit(false);
+    ) {
+      setValidToSubmit(true);
+    } else {
+      setValidToSubmit(false);
+    }
   };
 
   useEffect(() => {
     checkIfInfoIsValidToSubmit();
   }, [validation]);
+  useEffect(() => {
+    checkFormAction();
+  }, []);
 
   return (
     <div className="absolute top-0 left-0 z-20 flex h-screen w-full items-center justify-center bg-black bg-opacity-75 font-poppins font-bold text-black xs:text-sm">
@@ -124,9 +163,8 @@ function AddExercise({
           type="text"
           value={week}
           setValue={setWeek}
-          enableValidation={true}
-          validation={validation.week}
-          setValidation={setValidation}
+          isDisable={true}
+          enableValidation={false}
         />
         <SecondaryInput
           label="Day"
@@ -200,7 +238,9 @@ function AddExercise({
             }`}
             disabled={validToSubmit ? false : true}
             onClick={() => {
-              addExerciseHandler();
+              action !== "Edit"
+                ? addExerciseHandler()
+                : updateExerciseHandler();
             }}
           >
             Save
@@ -211,4 +251,4 @@ function AddExercise({
   );
 }
 
-export default AddExercise;
+export default PopUpExerciseForm;

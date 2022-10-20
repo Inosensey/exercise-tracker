@@ -13,6 +13,7 @@ type SecondaryInputType = {
   label: string;
   name: string;
   value: string;
+  isDisable?: boolean;
   setValue: React.Dispatch<React.SetStateAction<any>>;
   enableValidation: boolean;
   validation?: any;
@@ -41,6 +42,7 @@ export const SecondaryInput = ({
   enableValidation = false,
   validation,
   setValidation,
+  isDisable = false,
 }: SecondaryInputType) => {
   return (
     <div className="flex flex-col gap-1">
@@ -48,6 +50,7 @@ export const SecondaryInput = ({
       <input
         type={type}
         name={name}
+        disabled={isDisable}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           if (enableValidation) {
             const validationRes: ValidationType = useInputValidation(
@@ -83,7 +86,7 @@ export const SecondaryInput = ({
           }
         }}
       />
-      {validation.message !== "" && !validation.valid && (
+      {enableValidation && validation.message !== "" && !validation.valid && (
         <div className="flex items-center gap-1 font-normal">
           <i className="fa-solid fa-circle-exclamation text-InvalidColor xs:text-xs"></i>
           <p className="text-InvalidColor xs:text-xs">{validation.message}</p>

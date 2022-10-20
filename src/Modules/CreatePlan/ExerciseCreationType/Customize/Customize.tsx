@@ -1,10 +1,8 @@
-import CustomizeExerciseLogic from "@/logic/CustomizeExerciseLogic";
-import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { IExerciseSchedule, IExerciseSet } from "Typescript/Interface";
-import AddExercise from "./AddExercise";
 import AddExercisePlan from "./AddExercisePlan";
 import CustomizeExercises from "./CustomizeExercises";
+import CustomizeExerciseLogic from "@/logic/CustomizeExerciseLogic";
 
 type props = {
   setExerciseCreateType: React.Dispatch<React.SetStateAction<string>>;
@@ -26,8 +24,6 @@ function Customize({ setExerciseCreateType }: props) {
   );
   const [showCustomizeExerciseCard, setShowCustomizeExerciseCard] =
     useState<boolean>(false);
-  const [showPopUpAddExercise, setShowPopUpAddExercise] =
-    useState<boolean>(false);
 
   const setExerciseHandler = (numOfWeeks: string, exerciseSetName: string) => {
     const ExerciseSchedule: IExerciseSchedule[] = SetExerciseWeeks(
@@ -42,34 +38,24 @@ function Customize({ setExerciseCreateType }: props) {
 
   return (
     <>
-      <div className="relative flex h-full flex-col gap-3 font-poppins">
+      <div className="flex h-full flex-col gap-3 font-poppins">
         <button
           className="absolute right-2 z-10 rounded-md border border-DarkBlueColor p-0.5 px-1 text-DarkBlueColor xs:text-sm"
           onClick={() => setExerciseCreateType("")}
         >
           Cancel
         </button>
-        <div className="relative flex h-full items-center justify-center">
+        <div className="flex h-full items-center justify-center">
           {!showCustomizeExerciseCard ? (
             <AddExercisePlan setExerciseHandler={setExerciseHandler} />
           ) : (
             <CustomizeExercises
               exerciseSet={exerciseSet}
-              setShowPopUpAddExercise={setShowPopUpAddExercise}
+              setExerciseSet={setExerciseSet}
             />
           )}
         </div>
       </div>
-      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {showPopUpAddExercise && (
-          <AddExercise
-            setShowPopUpAddExercise={setShowPopUpAddExercise}
-            ExerciseSchedules={exerciseSet.Schedules}
-            setExerciseSet={setExerciseSet}
-            exerciseSet={exerciseSet}
-          />
-        )}
-      </AnimatePresence>
     </>
   );
 }

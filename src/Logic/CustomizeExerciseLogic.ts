@@ -14,12 +14,7 @@ const CustomizeExerciseLogic = () => {
     return ExerciseWeek;
   };
   const addExercises = (
-    exerciseSchedule: IExerciseSchedule[],
-    setExerciseSchedule: React.Dispatch<
-      React.SetStateAction<IExerciseSchedule[]>
-    >,
     exerciseSet: IExerciseSet,
-    setExerciseSet: React.Dispatch<React.SetStateAction<IExerciseSet>>,
     ExerciseInfo: ExerciseType,
     Week: string,
     Day: string
@@ -49,7 +44,41 @@ const CustomizeExerciseLogic = () => {
     }
     return ExerciseSetCopy;
   };
-  return { SetExerciseWeeks, addExercises };
+  const updateExercise = (
+    exerciseSet: IExerciseSet,
+    ExerciseInfo: ExerciseType,
+    Week: string,
+    Day: string,
+    selectedExerciseName: string
+  ) => {
+    const exerciseSetCopy: IExerciseSet = exerciseSet;
+    const exerciseWeekIndex = exerciseSet.Schedules.findIndex(
+      (info: IExerciseSchedule) => info.Week === parseInt(Week)
+    );
+    const exerciseDayIndex = exerciseSet.Schedules[
+      exerciseWeekIndex
+    ].ExerciseSchedule.findIndex((info: IExercisePerDay) => info.Day === Day);
+    const exerciseNameIndex = exerciseSetCopy.Schedules[
+      exerciseWeekIndex
+    ].ExerciseSchedule[exerciseDayIndex].Exercise.findIndex(
+      (info: ExerciseType) => info.name === selectedExerciseName
+    );
+
+    exerciseSetCopy.Schedules[exerciseWeekIndex].ExerciseSchedule[
+      exerciseDayIndex
+    ].Exercise[exerciseNameIndex].name = ExerciseInfo.name;
+    exerciseSetCopy.Schedules[exerciseWeekIndex].ExerciseSchedule[
+      exerciseDayIndex
+    ].Exercise[exerciseNameIndex].bodyPart = ExerciseInfo.bodyPart;
+    exerciseSetCopy.Schedules[exerciseWeekIndex].ExerciseSchedule[
+      exerciseDayIndex
+    ].Exercise[exerciseNameIndex].target = ExerciseInfo.target;
+    exerciseSetCopy.Schedules[exerciseWeekIndex].ExerciseSchedule[
+      exerciseDayIndex
+    ].Exercise[exerciseNameIndex].equipment = ExerciseInfo.equipment;
+    return exerciseSetCopy;
+  };
+  return { SetExerciseWeeks, addExercises, updateExercise };
 };
 
 export default CustomizeExerciseLogic;
